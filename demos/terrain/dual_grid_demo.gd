@@ -18,7 +18,8 @@ extends Control
 var _factory := NoiseFieldFactory.new()
 var _terrain: DualGridTerrain
 var _visualizer: DualGridVisualizer
-var _decoration_layer: DecorationLayer
+#var _decoration_layer: DecorationLayer
+var _decorations: DualGridDecorations
 
 func _ready() -> void:
 	_setup()
@@ -32,7 +33,9 @@ func _setup() -> void:
 	_visualizer.tile_pixel_size = tile_pixel_size
 	_visualizer.show_grid = show_grid
 	
-	_decoration_layer = DecorationLayer.new()
+	#_decoration_layer = DecorationLayer.new()
+	_decorations = DualGridDecorations.new()
+	view.add_child(_decorations)
 
 func _regenerate() -> void:
 	# 노이즈 필드 생성
@@ -54,12 +57,14 @@ func _regenerate() -> void:
 
 func _render() -> void:
 	var img := _visualizer.render(_terrain)
+	view.texture = ImageTexture.create_from_image(img)
 	
 	# 장식물 레이어 적용 (선택적)
 	if show_decorations:
-		img = _decoration_layer.apply(img, _terrain, noise_seed)
-	
-	view.texture = ImageTexture.create_from_image(img)
+		_decorations.visible = true
+		_decorations.generate(_terrain, tile_pixel_size, noise_seed)
+	else:
+		_decorations.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
