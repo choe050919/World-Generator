@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p14wi")
 grid_size = Vector2i(32, 32)
-tile_pixel_size = 32
+tile_pixel_size = 16
 
 [node name="View" type="TextureRect" parent="."]
 layout_mode = 1
