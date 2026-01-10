@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p14wi")
 grid_size = Vector2i(32, 32)
-tile_pixel_size = 16
+tile_pixel_size = 32
 
 [node name="View" type="TextureRect" parent="."]
 layout_mode = 1
@@ -38,5 +38,6 @@ offset_right = 400.0
 grow_vertical = 0
 text = "R: 새 시드
 G: 그리드 토글
+D: 장식물 토글
 ↑↓: threshold 조정
 +/-: frequency 조정"

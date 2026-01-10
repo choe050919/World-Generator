@@ -13,10 +13,12 @@ extends Control
 
 ## 시각화 설정
 @export var show_grid: bool = false
+@export var show_decorations: bool = true  # 장식물 표시
 
 var _factory := NoiseFieldFactory.new()
 var _terrain: DualGridTerrain
 var _visualizer: DualGridVisualizer
+var _decoration_layer: DecorationLayer
 
 func _ready() -> void:
 	_setup()
@@ -29,7 +31,8 @@ func _setup() -> void:
 	_visualizer = DualGridVisualizer.new()
 	_visualizer.tile_pixel_size = tile_pixel_size
 	_visualizer.show_grid = show_grid
-	# 패턴 생성은 _init()에서 자동으로 됨
+	
+	_decoration_layer = DecorationLayer.new()
 
 func _regenerate() -> void:
 	# 노이즈 필드 생성
@@ -51,6 +54,11 @@ func _regenerate() -> void:
 
 func _render() -> void:
 	var img := _visualizer.render(_terrain)
+	
+	# 장식물 레이어 적용 (선택적)
+	if show_decorations:
+		img = _decoration_layer.apply(img, _terrain, noise_seed)
+	
 	view.texture = ImageTexture.create_from_image(img)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -62,6 +70,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_G:
 				_visualizer.show_grid = not _visualizer.show_grid
 				_render()
+			KEY_D:
+				show_decorations = not show_decorations
+				_render()
+				print("Decorations: ", "ON" if show_decorations else "OFF")
 			KEY_UP:
 				threshold = min(1.0, threshold + 0.05)
 				_terrain.threshold = threshold
