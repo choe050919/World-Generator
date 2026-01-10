@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cn76kj6c4sjf1"]
 
-[ext_resource type="Script" uid="uid://dobwl8lhp8v3b" path="res://noise/visualizer/noise_demo_with_visualizer.gd" id="1_40rrc"]
+[ext_resource type="Script" uid="uid://dobwl8lhp8v3b" path="res://demos/noise/noise_demo_with_visualizer.gd" id="1_40rrc"]
 
 [node name="NoiseDemoWithVisualizer" type="Control"]
 layout_mode = 3

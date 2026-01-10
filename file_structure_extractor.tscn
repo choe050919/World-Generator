@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpkrb5oxr1ts3"]
+
+[ext_resource type="Script" uid="uid://cbkdq7r1l7ids" path="res://file_structure_extractor.gd" id="1_darq8"]
+
+[node name="FileStructureExtractor" type="Node"]
+script = ExtResource("1_darq8")

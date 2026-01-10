@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7jwykvy0vdcq"]
+[gd_scene load_steps=2 format=3 uid="uid://pmcjc221p23a"]
 
-[ext_resource type="Script" uid="uid://dhsgci6ya1jpt" path="res://noise/demo/noise_hsv_3layer_demo.gd" id="1_aaybb"]
+[ext_resource type="Script" uid="uid://ie4ksfvoqswa" path="res://demos/noise/noise_demo_simple.gd" id="1_2u54c"]
 
-[node name="NoiseHSV3LayerDemo" type="Control"]
+[node name="NoiseDemoSimple" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_aaybb")
+script = ExtResource("1_2u54c")
 
 [node name="View" type="TextureRect" parent="."]
 layout_mode = 1

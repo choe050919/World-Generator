@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bchkhdl2fh8o"]
+
+[ext_resource type="Script" uid="uid://b8k7omljxjihq" path="res://tools/corner_test.gd" id="1_ix2lt"]
+
+[node name="CornerTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ix2lt")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "Corner Combination Test - 16 cases
+Red corners = LAND, Cyan corners = WATER
+Press R to refresh"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
