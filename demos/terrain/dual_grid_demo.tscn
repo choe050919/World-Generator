@@ -39,5 +39,8 @@ grow_vertical = 0
 text = "R: 새 시드
 G: 그리드 토글
 D: 장식물 토글
+C: Style 등고선 토글
+V: Dev 등고선 토글
 ↑↓: threshold 조정
-+/-: frequency 조정"
++/-: frequency 조정
+[ ]: 등고선 간격 조정"

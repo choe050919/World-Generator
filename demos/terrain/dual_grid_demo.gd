@@ -69,31 +69,74 @@ func _render() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
+			# === 생성 관련 ===
 			KEY_R:
 				noise_seed += 1
 				_regenerate()
+				print("New seed: ", noise_seed)
+			
+			# === 표시 토글 ===
 			KEY_G:
 				_visualizer.show_grid = not _visualizer.show_grid
 				_render()
+				print("Grid: ", "ON" if _visualizer.show_grid else "OFF")
+			
 			KEY_D:
 				show_decorations = not show_decorations
 				_render()
 				print("Decorations: ", "ON" if show_decorations else "OFF")
+			
+			KEY_C:
+				_visualizer.show_style_contours = not _visualizer.show_style_contours
+				_render()
+				print("Style Contours: ", "ON" if _visualizer.show_style_contours else "OFF")
+			
+			KEY_V:
+				_visualizer.show_dev_contours = not _visualizer.show_dev_contours
+				_render()
+				print("Dev Contours: ", "ON" if _visualizer.show_dev_contours else "OFF")
+			
+			# === Threshold 조정 ===
 			KEY_UP:
 				threshold = min(1.0, threshold + 0.05)
 				_terrain.threshold = threshold
 				_render()
-				print("Threshold: ", threshold)
+				print("Threshold: %.2f" % threshold)
+			
 			KEY_DOWN:
 				threshold = max(0.0, threshold - 0.05)
 				_terrain.threshold = threshold
 				_render()
-				print("Threshold: ", threshold)
+				print("Threshold: %.2f" % threshold)
+			
+			# === Frequency 조정 ===
 			KEY_EQUAL, KEY_PLUS:
 				frequency = min(1.0, frequency * 1.2)
 				_regenerate()
-				print("Frequency: ", frequency)
+				print("Frequency: %.3f" % frequency)
+			
 			KEY_MINUS:
 				frequency = max(0.001, frequency / 1.2)
 				_regenerate()
-				print("Frequency: ", frequency)
+				print("Frequency: %.3f" % frequency)
+			
+			# === 등고선 간격 조정 ===
+			KEY_BRACKETLEFT:  # [
+				if _visualizer.show_dev_contours:
+					_visualizer.dev_contour_step = max(0.01, _visualizer.dev_contour_step - 0.05)
+					_render()
+					print("Dev Contour Step: %.2f" % _visualizer.dev_contour_step)
+				elif _visualizer.show_style_contours:
+					_visualizer.style_contour_step = max(0.05, _visualizer.style_contour_step - 0.05)
+					_render()
+					print("Style Contour Step: %.2f" % _visualizer.style_contour_step)
+			
+			KEY_BRACKETRIGHT:  # ]
+				if _visualizer.show_dev_contours:
+					_visualizer.dev_contour_step = min(0.5, _visualizer.dev_contour_step + 0.05)
+					_render()
+					print("Dev Contour Step: %.2f" % _visualizer.dev_contour_step)
+				elif _visualizer.show_style_contours:
+					_visualizer.style_contour_step = min(0.5, _visualizer.style_contour_step + 0.05)
+					_render()
+					print("Style Contour Step: %.2f" % _visualizer.style_contour_step)
